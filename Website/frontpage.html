@@ -1,16 +1,36 @@
 <!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PiCam Server</title>
     <link rel="stylesheet" href='frontpage.css'/>
 </head>
 <body>
-    
-        <h1>PiCam Live Streaming</h1>
-        
-        <div class="img-container">
-            <img src="{{ url_for('video_feed') }}">
-        </div>
-        <footer>Pixelforge Games All right reserved &#169;</footer>
-        
+    <h1>Pixelforge Live Streaming</h1>
+    <div id="container">
+        <video autoplay="true" id="videoElement">
+
+        </video>
+    </div>
+
+    <script>
+        let video = document.querySelector("#videoElement");
+
+        if (navigator.mediaDevices.getUserMedia) {
+            navigator.mediaDevices.getUserMedia({ video: true})
+            .then (function (stream) {
+                video.srcObject = stream;
+            })
+            .catch (function (error) {
+                console.log("Something went wrong!");
+            })
+        } else {
+            console.log("getUserMedia not supported!");
+        }
+    </script>
+
+   
+    <footer>Pixelforge Games All rights reserved &#169;</footer>
 </body>
 </html>
