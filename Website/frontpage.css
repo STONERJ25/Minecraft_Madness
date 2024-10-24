@@ -1,5 +1,5 @@
 body {
-  background-color: white;
+  background-color: rgb(246, 252, 223);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -9,17 +9,18 @@ body {
 }
 
 h1 {
-  color: royalblue;
+  color: rgb(49, 81, 30);
   text-align: center;
+  padding: 10px;
 }
 
 #container {
-  width: 50%;
-  border: 3px solid royalblue;
-  border-radius: 6px;
+  width: 30%;
   overflow: hidden;
-  padding: 20px;
-  background-color: white;
+  border: 35px solid transparent;
+  border-image: url(images/GrassBlock.png);
+  border-image-slice: 50;
+  border-image-width: 40px;
 }
 
 video {
@@ -27,7 +28,7 @@ video {
 }
 
 footer {
-  background-color: royalblue;
+  background-color: rgb(49, 81, 30);
   padding: 30px;
   text-align: center;
   color: white;
