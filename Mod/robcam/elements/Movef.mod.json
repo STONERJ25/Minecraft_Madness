@@ -1,0 +1,12 @@
+{
+  "_fv": 69,
+  "_type": "keybind",
+  "definition": {
+    "triggerKey": "I",
+    "keyBindingName": "Movef",
+    "keyBindingCategoryKey": "misc",
+    "onKeyPressed": {
+      "name": "MovefOnKeyPressed"
+    }
+  }
+}
