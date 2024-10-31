@@ -11,23 +11,17 @@
 <body>
 
     <header>
-
         <img src="images/MinecraftLogo.webp" alt="MMLogo" style="width:100px;">
-
     </header>
 
     <main>
-
-
-
         <h1>Minecraft Madness Live Streaming</h1>
         <div id="container">
-            <video autoplay="true" id="videoElement">
-
-            </video>
+            <video autoplay="true" id="videoElement"></video>
         </div>
 
-        <button type="button">Screenshot</button>
+        <button type="button" onclick="takeScreenshot()">Screenshot</button>
+        <canvas id="canvas" style="display:none;"></canvas>
 
         <script>
             let video = document.querySelector("#videoElement");
@@ -39,13 +33,27 @@
                     })
                     .catch(function (error) {
                         console.log("Something went wrong!");
-                    })
+                    });
             } else {
                 console.log("getUserMedia not supported!");
             }
+
+            function takeScreenshot() {
+                let canvas = document.getElementById("canvas");
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                let context = canvas.getContext("2d");
+                context.drawImage(video, 0, 0, canvas.width, canvas.height);
+                let imgData = canvas.toDataURL("image/jpeg");
+
+                // Download the image
+                let link = document.createElement('a');
+                link.href = imgData;
+                link.download = 'screenshot.jpg';
+                link.click();
+            }
         </script>
     </main>
-
 
     <footer>Pixelforge Games All rights reserved &#169;</footer>
 </body>
