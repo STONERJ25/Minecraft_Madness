@@ -1,39 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PiCam Server</title>
-    <link rel="stylesheet" href='frontpage.css'/>
+    <link rel="stylesheet" href='frontpage.css' />
 </head>
+
 <body>
 
-    <h1>Minecraft_Madness Live Streaming</h1>
-    <div id="container">
-        <video autoplay="true" id="videoElement">
+    <header>
 
-        </video>
-    </div>
+        <img src="images/MinecraftLogo.webp" alt="MMLogo" style="width:100px;">
 
-    <button type="button">Screenshot</button>
+    </header>
 
-    <script>
-        let video = document.querySelector("#videoElement");
+    <main>
 
-        if (navigator.mediaDevices.getUserMedia) {
-            navigator.mediaDevices.getUserMedia({ video: true})
-            .then (function (stream) {
-                video.srcObject = stream;
-            })
-            .catch (function (error) {
-                console.log("Something went wrong!");
-            })
-        } else {
-            console.log("getUserMedia not supported!");
-        }
-    </script>
 
-   
+
+        <h1>Minecraft Madness Live Streaming</h1>
+        <div id="container">
+            <video autoplay="true" id="videoElement">
+
+            </video>
+        </div>
+
+        <button type="button">Screenshot</button>
+
+        <script>
+            let video = document.querySelector("#videoElement");
+
+            if (navigator.mediaDevices.getUserMedia) {
+                navigator.mediaDevices.getUserMedia({ video: true })
+                    .then(function (stream) {
+                        video.srcObject = stream;
+                    })
+                    .catch(function (error) {
+                        console.log("Something went wrong!");
+                    })
+            } else {
+                console.log("getUserMedia not supported!");
+            }
+        </script>
+    </main>
+
+
     <footer>Pixelforge Games All rights reserved &#169;</footer>
 </body>
+
 </html>
