@@ -1,0 +1,248 @@
+{
+  "mod_elements": [
+    {
+      "name": "Movef",
+      "type": "keybind",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "movef",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/robcam/network/MovefMessage.java"
+        ]
+      }
+    },
+    {
+      "name": "Moveb",
+      "type": "keybind",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "moveb",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/robcam/network/MovebMessage.java"
+        ]
+      }
+    },
+    {
+      "name": "Movel",
+      "type": "keybind",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "movel",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/robcam/network/MovelMessage.java"
+        ]
+      }
+    },
+    {
+      "name": "Mover",
+      "type": "keybind",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "mover",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/robcam/network/MoverMessage.java"
+        ]
+      }
+    },
+    {
+      "name": "Comm",
+      "type": "code",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "comm",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/robcam/Comm.java"
+        ]
+      }
+    },
+    {
+      "name": "MovefOnKeyPressed",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "movef_on_key_pressed",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/robcam/procedures/MovefOnKeyPressedProcedure.java"
+        ],
+        "dependencies": []
+      }
+    },
+    {
+      "name": "MovebOnKeyPressed",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "moveb_on_key_pressed",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/robcam/procedures/MovebOnKeyPressedProcedure.java"
+        ],
+        "dependencies": []
+      }
+    },
+    {
+      "name": "MovelOnKeyPressed",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "movel_on_key_pressed",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/robcam/procedures/MovelOnKeyPressedProcedure.java"
+        ],
+        "dependencies": []
+      }
+    },
+    {
+      "name": "MoverOnKeyPressed",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "mover_on_key_pressed",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/robcam/procedures/MoverOnKeyPressedProcedure.java"
+        ],
+        "dependencies": []
+      }
+    },
+    {
+      "name": "M",
+      "type": "gui",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "m",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/robcam/client/gui/MScreen.java",
+          "src/main/java/net/mcreator/robcam/world/inventory/MMenu.java"
+        ]
+      }
+    },
+    {
+      "name": "Screen",
+      "type": "block",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "screen",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/robcam/models/item/screen.json",
+          "src/main/resources/data/robcam/loot_tables/blocks/screen.json",
+          "src/main/java/net/mcreator/robcam/block/entity/ScreenBlockEntity.java",
+          "src/main/java/net/mcreator/robcam/block/ScreenBlock.java",
+          "src/main/resources/assets/robcam/blockstates/screen.json",
+          "src/main/resources/assets/robcam/models/block/screen.json"
+        ]
+      }
+    },
+    {
+      "name": "ScreenOnTickUpdate",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "screen_on_tick_update",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/robcam/procedures/ScreenOnTickUpdateProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Start",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "start",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/robcam/procedures/StartProcedure.java"
+        ],
+        "dependencies": []
+      }
+    },
+    {
+      "name": "Starter",
+      "type": "procedure",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "starter",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/robcam/procedures/StarterProcedure.java"
+        ],
+        "dependencies": []
+      }
+    },
+    {
+      "name": "Shade",
+      "type": "code",
+      "compiles": true,
+      "locked_code": true,
+      "registry_name": "shade",
+      "metadata": {
+        "files": [
+          "src/main/java/net/mcreator/robcam/Shade.java"
+        ]
+      }
+    }
+  ],
+  "variable_elements": [],
+  "sound_elements": [],
+  "tag_elements": {},
+  "tab_element_order": {},
+  "language_map": {
+    "en_us": {
+      "key.robcam.moveb": "Moveb",
+      "key.robcam.mover": "Mover",
+      "block.robcam.screen": "Screen",
+      "key.robcam.movel": "Movel",
+      "key.robcam.movef": "Movef"
+    }
+  },
+  "foldersRoot": {
+    "name": "~",
+    "children": []
+  },
+  "workspaceSettings": {
+    "modid": "robcam",
+    "modName": "robcam",
+    "version": "1.0.0",
+    "author": "Joshua Stoner, MCreator",
+    "websiteURL": "https://mcreator.net",
+    "license": "Not specified",
+    "serverSideOnly": false,
+    "requiredMods": [],
+    "dependencies": [],
+    "dependants": [],
+    "mcreatorDependencies": [],
+    "currentGenerator": "forge-1.20.1",
+    "credits": "Created using mod maker MCreator - https://mcreator.net/about",
+    "modElementsPackage": "net.mcreator.robcam"
+  },
+  "mcreatorVersion": 202400342716
+}
