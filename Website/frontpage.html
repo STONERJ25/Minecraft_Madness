@@ -49,19 +49,39 @@
             // Screenshot functionality
             function takeScreenshot() {
                 let canvas = document.getElementById("canvas");
+                let video = document.getElementById("videoElement");
+                
+                // Set canvas dimensions to match video dimensions
                 canvas.width = video.videoWidth;
                 canvas.height = video.videoHeight;
+                
+                // Draw video frame to canvas
                 let context = canvas.getContext("2d");
                 context.drawImage(video, 0, 0, canvas.width, canvas.height);
+                
+                // Convert canvas image to data URL
                 let imgData = canvas.toDataURL("image/jpeg");
-
-                // Download the image
+            
+                // Create a new image element for the gallery
+                let img = document.createElement("img");
+                img.src = imgData;
+                img.style.width = "150px";  // Set thumbnail size
+                img.style.margin = "5px";   // Add some space around each thumbnail
+            
+                // Append the image to the gallery container
+                document.getElementById("galleryContainer").appendChild(img);
+            
+                // Optionally, download the image
                 let link = document.createElement('a');
                 link.href = imgData;
                 link.download = 'screenshot.jpg';
                 link.click();
             }
         </script>
+        <div id="screenshotGallery">
+            <h2>Screenshot Gallery</h2>
+            <div id="galleryContainer"></div>
+        </div>
     </main>
 
     <footer>Pixelforge Games All rights reserved &#169;</footer>

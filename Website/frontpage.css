@@ -17,6 +17,8 @@ body {
 header {
   display: flex;
   justify-content: center;
+  /* background-color: rgb(49, 81, 30); */
+  width: 100%;
   padding: 20px;
 }
 
@@ -32,6 +34,7 @@ main {
   max-width: 800px;
   padding: 20px;
 }
+
 
 h1 {
   color: rgb(49, 81, 30);
@@ -72,6 +75,11 @@ button {
 button:hover {
   background-color: rgb(49, 81, 30);
   color: rgb(246, 252, 223);
+}
+
+#screenshotGallery{
+  margin-bottom: 100px;
+  text-align: center;
 }
 
 footer {
