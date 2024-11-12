@@ -41,6 +41,6 @@ wss.on('connection', (ws) => {
 });
 
 // Start the server
-server.listen(3000, () => {
-    console.log('Server running on http://localhost:3000');
+server.listen(8765, () => {
+    console.log('Server running on http://localhost:8765');
 });

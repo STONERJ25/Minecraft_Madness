@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PiCam Server</title>
     <link rel="stylesheet" href="frontpage.css" />
 </head>
-
 <body>
     <header>
         <img src="images/MinecraftLogo.webp" alt="MMLogo" style="width: 275px;">
@@ -16,68 +14,15 @@
     <main>
         <h1>Minecraft Madness Live Streaming</h1>
 
-        <!-- Flask video feed -->
-        <div class="img-container">
-            <img src="http://localhost:5000/video_feed" alt="Live Stream">
-     </div>
-
-        <!-- Local webcam preview and screenshot -->
-        <h2>Local Webcam Preview</h2>
+        <!-- Imported Video Stream Preview -->
+        <h2>Imported Video Stream Preview</h2>
         <div id="container">
-            <video autoplay="true" id="videoElement"></video>
+            <img id="imageElement" style="width: 100%; max-width: 800px;">
         </div>
 
         <button type="button" onclick="takeScreenshot()">Screenshot</button>
         <canvas id="canvas" style="display:none;"></canvas>
 
-        <script>
-            // Local webcam setup
-            let video = document.querySelector("#videoElement");
-
-            if (navigator.mediaDevices.getUserMedia) {
-                navigator.mediaDevices.getUserMedia({ video: true })
-                    .then(function (stream) {
-                        video.srcObject = stream;
-                    })
-                    .catch(function (error) {
-                        console.log("Something went wrong!");
-                    });
-            } else {
-                console.log("getUserMedia not supported!");
-            }
-
-            // Screenshot functionality
-            function takeScreenshot() {
-                let canvas = document.getElementById("canvas");
-                let video = document.getElementById("videoElement");
-                
-                // Set canvas dimensions to match video dimensions
-                canvas.width = video.videoWidth;
-                canvas.height = video.videoHeight;
-                
-                // Draw video frame to canvas
-                let context = canvas.getContext("2d");
-                context.drawImage(video, 0, 0, canvas.width, canvas.height);
-                
-                // Convert canvas image to data URL
-                let imgData = canvas.toDataURL("image/jpeg");
-            
-                // Create a new image element for the gallery
-                let img = document.createElement("img");
-                img.src = imgData;
-                img.style.width = "150px";  // Set thumbnail size
-                img.style.margin = "5px";   // Add some space around each thumbnail
-            
-                // Append the image to the gallery container
-                document.getElementById("galleryContainer").appendChild(img);
-            
-                // Optionally, download the image
-                let link = document.createElement('a');
-                link.href = imgData;
-                link.download = 'screenshot.jpg';
-                link.click();
-            }
-        </script>
         <div id="screenshotGallery">
             <h2>Screenshot Gallery</h2>
             <div id="galleryContainer"></div>
@@ -85,6 +30,75 @@
     </main>
 
     <footer>Pixelforge Games All rights reserved &#169;</footer>
-</body>
 
+    <script>
+        const image = document.querySelector("#imageElement");
+
+        // WebSocket connection to the server
+        const socket = new WebSocket('ws://localhost:8765');
+
+        socket.binaryType = 'arraybuffer';  // Receive data as binary
+
+        let lastFrameTime = 0;
+        const FRAME_RATE_LIMIT = 1000 / 30;  // Limit to 30 frames per second
+
+     // In your JavaScript
+
+socket.onmessage = function(event) {
+    const frameData = event.data;  // Already in binary format as ArrayBuffer
+
+    // Check frame rate
+    const currentTime = Date.now();
+    if (currentTime - lastFrameTime > FRAME_RATE_LIMIT) {
+        // Create a Blob from the ArrayBuffer
+        const imageBlob = new Blob([frameData], { type: 'image/jpeg' });
+
+        // Create an object URL for the image Blob
+        const imageURL = URL.createObjectURL(imageBlob);
+
+        // Set the image element's source to the Blob URL
+        image.src = imageURL;
+
+        // Update last frame time
+        lastFrameTime = currentTime;
+
+        // Optional: Revoke the object URL after a short delay to free up memory
+        setTimeout(() => URL.revokeObjectURL(imageURL), 100);
+    }
+};
+
+
+        // Screenshot functionality
+        function takeScreenshot() {
+            let canvas = document.getElementById("canvas");
+            let img = document.getElementById("imageElement");
+            
+            // Set canvas dimensions to match image dimensions
+            canvas.width = img.naturalWidth;
+            canvas.height = img.naturalHeight;
+            
+            // Draw image frame to canvas
+            let context = canvas.getContext("2d");
+            context.drawImage(img, 0, 0, canvas.width, canvas.height);
+            
+            // Convert canvas image to data URL
+            let imgData = canvas.toDataURL("image/jpeg");
+        
+            // Create a new image element for the gallery
+            let galleryImg = document.createElement("img");
+            galleryImg.src = imgData;
+            galleryImg.style.width = "150px";  // Set thumbnail size
+            galleryImg.style.margin = "5px";   // Add some space around each thumbnail
+        
+            // Append the image to the gallery container
+            document.getElementById("galleryContainer").appendChild(galleryImg);
+        
+            // Optionally, download the image
+            let link = document.createElement('a');
+            link.href = imgData;
+            link.download = 'screenshot.jpg';
+            link.click();
+        }
+    </script>
+</body>
 </html>
