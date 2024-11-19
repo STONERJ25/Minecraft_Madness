@@ -18,6 +18,7 @@ nav{
   margin: auto;
   width: 100%;
   
+  
 }
 nav ul {
   display: flex;
@@ -26,6 +27,8 @@ nav ul {
   background-color: rgb(49, 81, 30);;
   padding: 30px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 0;
+  
 }
 
 nav ul li a {
@@ -45,6 +48,7 @@ header {
   /* background-color: rgb(49, 81, 30); */
   width: 100%;
   padding: 20px;
+  
 }
 
 .logo {
