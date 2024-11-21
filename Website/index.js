@@ -27,7 +27,7 @@ app.use(
 app.use(cors());
 
 // Serve static files for direct image access
-app.use('/Website/images', express.static(path.join(__dirname, 'images')));
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 // Serve a favicon to prevent 404 errors for favicon requests
 app.get('/favicon.ico', (req, res) => {
