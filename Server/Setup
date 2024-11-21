@@ -1,0 +1,47 @@
+Create a Oracle cloud VM to host the server on with the following settings.
+
+Canonical Ubuntu 22.04
+
+VM.Standard.A1.Flex
+
+Virtual machine, 1 core OCPU, 6 GB memory
+
+Make a VCN using default settings 
+
+Make a Subnet with default settings
+
+Download the SSH keys
+
+In the terminal run ssh -i <private_key_file> <username>@<public-ip-address>
+
+<private_key_file> is the full path and name of the file that contains the private key associated with the instance you want to access.
+
+<username> is the default username for the instance. For Oracle Linux and Redhat Enterprise Linux compatible images, the default username is opc. For Ubuntu images, the default username is ubuntu.
+
+<public-ip-address> is the instance's IP address that you retrieved from the Console.
+
+Initial Setup: 
+sudo -s 
+apt update 
+apt upgrade 
+
+apt install openjdk-17-jdk 
+
+Firewall: 
+apt install firewalld 
+firewall-cmd --permanent --zone=public --add-port=25565/tcp 
+firewall-cmd --permanent --zone=public --add-port=25565/udp 
+firewall-cmd --reload 
+
+Making the Server: 
+mkdir [Folder] 
+cd [Folder] 
+wget https://piston-data.mojang.com/v1/objects/84194a2f286ef7c14ed7ce0090dba59902951553/server.jar 
+java -Xmx1024M -Xms1024M -jar server.jar nogui 
+nano eula.txt 
+Change the false in the eula.txt to true
+Ctrl+X, Y, Enter 
+
+java -Xmx1024M -Xms1024M -jar server.jar nogui s
+creen java -Xmx8000M -Xms8000M -jar server.jar nogui 
+chmod 777 -R [Folder Directory]
