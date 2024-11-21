@@ -15,12 +15,12 @@ const server = http.createServer(app);
 app.use(cors());
 
 // Serve static files for direct image access
-app.use('/images', express.static(path.join(__dirname, 'images')));
+app.use('/images', express.static(path.join('images')));
 
 
 // Serve a favicon to prevent 404 errors for favicon requests
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  res.sendFile(path.join('index.html'));
 });
 
 
