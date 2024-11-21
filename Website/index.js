@@ -55,6 +55,11 @@ app.use(helmet({ contentSecurityPolicy: false }));
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
+app.use((req, res, next) => {
+  res.setHeader('Content-Security-Policy', "default-src 'self';"); // Example of a basic CSP policy
+  next();
+});
+
 
 // Create a WebSocket server that listens on the same HTTP server
 const wss = new WebSocket.Server({ server });
