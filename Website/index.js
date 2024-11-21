@@ -22,6 +22,9 @@ app.use('/images', express.static(path.join('images')));
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, 'index.html'));
 });
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'frontpage.html'));
+});
 
 
 
