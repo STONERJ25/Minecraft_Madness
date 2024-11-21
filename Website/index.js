@@ -20,8 +20,9 @@ app.use('/images', express.static(path.join('images')));
 
 // Serve a favicon to prevent 404 errors for favicon requests
 app.get('*', (req, res) => {
-  res.sendFile(path.join('index.html'));
+  res.sendFile(path.resolve(__dirname, 'index.html'));
 });
+
 
 
 
