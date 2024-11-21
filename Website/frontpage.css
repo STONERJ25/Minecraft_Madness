@@ -45,9 +45,10 @@ nav ul li a:hover {
 header {
   display: flex;
   justify-content: center;
-  /* background-color: rgb(49, 81, 30); */
+  background-color: rgb(49, 81, 30); 
   width: 100%;
-  padding: 20px;
+  padding: 15px;
+  
   
 }
 
@@ -110,8 +111,18 @@ button:hover {
   text-align: center;
 }
 
-.dark-mode {
+body.dark-mode {
   background-color: #2d2929;
+  color: #ffffff;
+}
+header.dark-mode,footer.dark-mode{
+  background-color:  rgb(133, 159, 61);
+  color: #ffffff;
+}
+nav.dark-mode ul li a {
+  color: #ffffff;
+}
+h1.dark-mode{
   color: #ffffff;
 }
 
