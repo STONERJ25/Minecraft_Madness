@@ -1,28 +1,49 @@
-// Required packages: ws, express, and fs (file system module is built-in)
-
+// Required packages: ws, express, fs, helmet, and cors
 const express = require('express');
 const WebSocket = require('ws');
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
+const helmet = require('helmet');
+const cors = require('cors');
 
 // Create an Express app
 const app = express();
 const server = http.createServer(app);
 
-// Create a WebSocket server that listens on the same HTTP server
-const wss = new WebSocket.Server({ server });
+// Use Helmet for security headers, including a permissive Content Security Policy
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        imgSrc: ["'self'", "data:", "http:"],
+      },
+    },
+  })
+);
+
+// Enable CORS to allow cross-origin requests
+app.use(cors());
 
 // Serve static files for direct image access
 app.use('/Website/images', express.static(path.join(__dirname, 'images')));
 
-// Serve the HTML page with the video stream
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.html');
+// Serve a favicon to prevent 404 errors for favicon requests
+app.get('/favicon.ico', (req, res) => {
+  res.sendFile(path.join(__dirname, 'favicon.ico'));
 });
 
+// Serve the HTML page with the video stream
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+// Create a WebSocket server that listens on the same HTTP server
+const wss = new WebSocket.Server({ server });
+
 // Handle WebSocket connections from clients
-wss.on('connection', (ws) => {
+wss.on('connection', (ws, req) => {
   console.log("New WebSocket connection.");
 
   // Listen for video frames (Base64-encoded JPEGs) from the client
@@ -31,16 +52,16 @@ wss.on('connection', (ws) => {
 
     // Decode the Base64-encoded image
     const buffer = Buffer.from(message, 'base64');
-    const filePath = path.join(__dirname, 'Website/images', 'burner.jpg'); // Always save as burner.jpg
+    const filePath = path.join(__dirname, 'images', 'burner.jpg'); // Always save as burner.jpg
 
     // Save the frame as burner.jpg, overwriting the previous image
     fs.writeFile(filePath, buffer, (err) => {
       if (err) {
         console.error('Error saving image:', err);
       } else {
-        // Send the direct URL to the saved image back to the client
-        const imageUrl = `http://localhost:8765/Website/images/burner.jpg`;
-        ws.send(imageUrl);
+        // Dynamically generate the URL to the saved image
+        const imageUrl = `http://${req.headers.host}/images/burner.jpg`;
+        ws.send(imageUrl); // Send the image URL back to the client
       }
     });
   });
@@ -50,7 +71,14 @@ wss.on('connection', (ws) => {
   });
 });
 
+// Ensure the 'images' directory exists
+const imagesDir = path.join(__dirname, 'images');
+if (!fs.existsSync(imagesDir)) {
+  fs.mkdirSync(imagesDir);
+}
+
 // Start the server
-server.listen(8765, () => {
-  console.log("WebSocket server running on ws://localhost:8765");
+const PORT = 8765;
+server.listen(PORT, () => {
+  console.log(`WebSocket server running on ws://localhost:${PORT}`);
 });

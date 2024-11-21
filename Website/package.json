@@ -8,7 +8,9 @@
   "license": "MIT",
   "dependencies": {
     "express": "^4.19.2",
-    "ws": "^8.13.0"
+    "ws": "^8.13.0",
+    "helmet": "^7.0.0",
+    "cors": "^2.8.5"
   },
   
   "scripts": {
