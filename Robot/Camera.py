@@ -11,6 +11,7 @@ import traceback
 # WebSocket server address
 #WS_SERVER = "ws://minecraftmadness-production.up.railway.app:8765"  # Address of the WebSocket server
 WS_SERVER = "ws://192.168.137.1:8765"
+
 # Initialize Flask app
 app = Flask(__name__)
 
