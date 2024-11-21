@@ -124,3 +124,53 @@ footer {
   position: fixed;
   bottom: 0;
 }
+.team-container {
+  max-width: 1200px;
+  margin: 50px auto;
+  padding: 0 20px;
+}
+
+.team-member {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 50px;
+  padding: 20px;
+  background-color: rgb(246, 252, 223);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.member-image img {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.member-info {
+  flex: 1;
+}
+
+.member-info h3 {
+  color: rgb(49, 81, 30);
+  margin: 0 0 10px 0;
+  font-size: 1.5em;
+}
+
+.role {
+  color: rgb(133, 159, 61);
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.experience {
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .team-member {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+  }
+}
