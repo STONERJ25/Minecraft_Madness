@@ -46,7 +46,10 @@ app.use(
 app.get('/favicon.ico', (req, res) => {
   res.sendFile(path.join(__dirname, 'favicon.ico'));
 });
-
+app.use((req, res, next) => {
+  res.setHeader('Content-Security-Policy', '');
+  next();
+});
 app.use(helmet({ contentSecurityPolicy: false }));
 // Serve the HTML page with the video stream
 app.get('/', (req, res) => {
