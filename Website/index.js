@@ -29,11 +29,25 @@ app.use(cors());
 // Serve static files for direct image access
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"], // Allow resources from your own domain
+      imgSrc: ["'self'", "https: data:"], // Allow images from your domain and external sources
+      scriptSrc: ["'self'"], // Allow scripts from your domain
+      styleSrc: ["'self'", "'unsafe-inline'"], // Allow styles from your domain and inline styles
+      objectSrc: ["'none'"], // Disallow <object>, <embed>, and <applet> tags
+      connectSrc: ["'self'"], // Allow connections to your domain
+      frameSrc: ["'self'"], // Allow iframes from your domain
+    },
+  })
+);
 // Serve a favicon to prevent 404 errors for favicon requests
 app.get('/favicon.ico', (req, res) => {
   res.sendFile(path.join(__dirname, 'favicon.ico'));
 });
 
+app.use(helmet({ contentSecurityPolicy: false }));
 // Serve the HTML page with the video stream
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
