@@ -17,7 +17,7 @@
         <!-- Imported Video Stream Preview -->
         <h2>Imported Video Stream Preview</h2>
         <div id="container">
-            <img id="imageElement" style="width: 100%; max-width: 800px;">
+            <img id="imageElement" src="images/burner.jpg" style="width: 100%; max-width: 800px;">
         </div>
 
         <button type="button" onclick="takeScreenshot()">Screenshot</button>
@@ -34,68 +34,31 @@
     <script>
         const image = document.querySelector("#imageElement");
 
-        // WebSocket connection to the server
-        const socket = new WebSocket('ws://localhost:8765');
+        // Function to refresh the image every second
+        function refreshImage() {
+            const timestamp = new Date().getTime(); // Get current timestamp
+            image.src = `images/burner.jpg?t=${timestamp}`; // Append timestamp as a query param
+        }
 
-        socket.binaryType = 'arraybuffer';  // Receive data as binary
-
-        let lastFrameTime = 0;
-        const FRAME_RATE_LIMIT = 1000 / 30;  // Limit to 30 frames per second
-
-     // In your JavaScript
-
-socket.onmessage = function(event) {
-    const frameData = event.data;  // Already in binary format as ArrayBuffer
-
-    // Check frame rate
-    const currentTime = Date.now();
-    if (currentTime - lastFrameTime > FRAME_RATE_LIMIT) {
-        // Create a Blob from the ArrayBuffer
-        const imageBlob = new Blob([frameData], { type: 'image/jpeg' });
-
-        // Create an object URL for the image Blob
-        const imageURL = URL.createObjectURL(imageBlob);
-
-        // Set the image element's source to the Blob URL
-        image.src = imageURL;
-
-        // Update last frame time
-        lastFrameTime = currentTime;
-
-        // Optional: Revoke the object URL after a short delay to free up memory
-        setTimeout(() => URL.revokeObjectURL(imageURL), 100);
-    }
-};
-
+        // Refresh the image every second
+        setInterval(refreshImage, 50);
 
         // Screenshot functionality
         function takeScreenshot() {
-            let canvas = document.getElementById("canvas");
-            let img = document.getElementById("imageElement");
-            
-            // Set canvas dimensions to match image dimensions
-            canvas.width = img.naturalWidth;
-            canvas.height = img.naturalHeight;
-            
-            // Draw image frame to canvas
-            let context = canvas.getContext("2d");
-            context.drawImage(img, 0, 0, canvas.width, canvas.height);
-            
-            // Convert canvas image to data URL
-            let imgData = canvas.toDataURL("image/jpeg");
-        
-            // Create a new image element for the gallery
-            let galleryImg = document.createElement("img");
-            galleryImg.src = imgData;
+            const img = document.getElementById("imageElement");
+
+            // Use the current `src` of the displayed image as a screenshot URL
+            const galleryImg = document.createElement("img");
+            galleryImg.src = img.src;
             galleryImg.style.width = "150px";  // Set thumbnail size
             galleryImg.style.margin = "5px";   // Add some space around each thumbnail
-        
+
             // Append the image to the gallery container
             document.getElementById("galleryContainer").appendChild(galleryImg);
-        
+
             // Optionally, download the image
-            let link = document.createElement('a');
-            link.href = imgData;
+            const link = document.createElement('a');
+            link.href = img.src;
             link.download = 'screenshot.jpg';
             link.click();
         }
