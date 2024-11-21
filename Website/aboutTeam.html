@@ -76,4 +76,37 @@
                 <p class="experience">Experience details here...</p>
             </div>
         </div>
+        <script>
+            function toggleDarkMode() {
+                const body = document.body;
+            
+                // Toggle the dark mode class
+                body.classList.toggle("dark-mode");
+            
+                // Save the preference to local storage
+                if (body.classList.contains("dark-mode")) {
+                    localStorage.setItem("darkMode", "enabled");
+                } else {
+                    localStorage.setItem("darkMode", "disabled");
+                }
+            
+                // Apply dark mode to other shared elements (e.g., header, footer)
+                document.querySelectorAll("header, footer, nav, h1").forEach(element => {
+                    element.classList.toggle("dark-mode");
+                });
+            }
+            
+            // Apply the dark mode on page load if it was enabled previously
+            document.addEventListener("DOMContentLoaded", () => {
+                const darkMode = localStorage.getItem("darkMode");
+                if (darkMode === "enabled") {
+                    document.body.classList.add("dark-mode");
+            
+                    // Apply dark mode to other shared elements (e.g., header, footer)
+                    document.querySelectorAll("header, footer, nav").forEach(element => {
+                        element.classList.add("dark-mode");
+                    });
+                }
+            });
+        </script>
     </main>
