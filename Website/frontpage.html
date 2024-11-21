@@ -36,6 +36,7 @@
             <h2>Screenshot Gallery</h2>
             <div id="galleryContainer"></div>
         </div>
+        <button onclick="toggleDarkMode()">Toggle Dark Mode</button>
     </main>
 
     <footer>Pixelforge Games All rights reserved &#169;</footer>
@@ -52,6 +53,9 @@
         const FRAME_RATE_LIMIT = 1000 / 30;  // Limit to 30 frames per second
 
      // In your JavaScript
+     function toggleDarkMode() {
+        document.body.classList.toggle("dark-mode");
+      }
 
 socket.onmessage = function(event) {
     const frameData = event.data;  // Already in binary format as ArrayBuffer
