@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PiCam Server</title>
+    <link rel="stylesheet" href="frontpage.css" />
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="./frontpage.html">Home</a></li>
+                <li><a href="./aboutRobot.html">About the Robot</a></li>
+                <li><a href="./aboutTeam.html">About the Team</a></li>
+            </ul>
+        </nav>
+        
+    </header>
+    <img src="images/MinecraftLogo.webp" alt="MMLogo" style="width: 300px;">
+
+    <main>
+        <h1>Minecraft Madness Live Streaming</h1>
+
+        <!-- Imported Video Stream Preview -->
+        <h2>Imported Video Stream Preview</h2>
+        <div id="container">
+            <img id="imageElement" src="images/burner.jpg" style="width: 100%; max-width: 800px;">
+        </div>
+
+        <button type="button" onclick="takeScreenshot()">Screenshot</button>
+        <canvas id="canvas" style="display:none;"></canvas>
+
+        <div id="screenshotGallery">
+            <h2>Screenshot Gallery</h2>
+            <div id="galleryContainer"></div>
+        </div>
+        <button onclick="toggleDarkMode()">Toggle Dark Mode</button>
+    </main>
+
+    <footer>Pixelforge Games All rights reserved &#169;</footer>
+
+    <script>
+        const image = document.querySelector("#imageElement");
+
+        // Function to refresh the image every second
+        function refreshImage() {
+            const timestamp = new Date().getTime(); // Get current timestamp
+            image.src = `images/burner.jpg?t=${timestamp}`; // Append timestamp as a query param
+        }
+
+        // Refresh the image every second
+        setInterval(refreshImage, 50);
+
+        // Screenshot functionality
+        function takeScreenshot() {
+            const img = document.getElementById("imageElement");
+
+            // Use the current `src` of the displayed image as a screenshot URL
+            const galleryImg = document.createElement("img");
+            galleryImg.src = img.src;
+            galleryImg.style.width = "150px";  // Set thumbnail size
+            galleryImg.style.margin = "5px";   // Add some space around each thumbnail
+
+            // Append the image to the gallery container
+            document.getElementById("galleryContainer").appendChild(galleryImg);
+
+            // Optionally, download the image
+            const link = document.createElement('a');
+            link.href = img.src;
+            link.download = 'screenshot.jpg';
+            link.click();
+        }
+        function toggleDarkMode() {
+            const body = document.body;
+        
+            // Toggle the dark mode class
+            body.classList.toggle("dark-mode");
+        
+            // Save the preference to local storage
+            if (body.classList.contains("dark-mode")) {
+                localStorage.setItem("darkMode", "enabled");
+            } else {
+                localStorage.setItem("darkMode", "disabled");
+            }
+        
+            // Apply dark mode to other shared elements (e.g., header, footer)
+            document.querySelectorAll("header, footer, nav, h1").forEach(element => {
+                element.classList.toggle("dark-mode");
+            });
+        }
+        
+        // Apply the dark mode on page load if it was enabled previously
+        document.addEventListener("DOMContentLoaded", () => {
+            const darkMode = localStorage.getItem("darkMode");
+            if (darkMode === "enabled") {
+                document.body.classList.add("dark-mode");
+        
+                // Apply dark mode to other shared elements (e.g., header, footer)
+                document.querySelectorAll("header, footer, nav").forEach(element => {
+                    element.classList.add("dark-mode");
+                });
+            }
+        });
+    </script>
+</body>
+</html>
