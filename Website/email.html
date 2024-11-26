@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Screenshot</title>
+    <link rel="stylesheet" href="frontpage.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="./frontpage.html">Home</a></li>
+                <li><a href="./aboutRobot.html">About the Robot</a></li>
+                <li><a href="./aboutTeam.html">About the Team</a></li>
+            </ul>
+        </nav>
+        
+    </header>
+    <main>
+        <h1>Request Your Screenshots</h1>
+        <form id="emailForm">
+            <label for="email">Enter your email:</label>
+            <input type="email" id="email" name="email" required placeholder="your-email@example.com">
+
+            <h2>Select Screenshots</h2>
+            <div id="screenshotSelector">
+                <!-- Dynamically populate with available screenshots -->
+            </div>
+
+            <button type="submit">Send Screenshots</button>
+        </form>
+    </main>
+
+    <script>
+        // Load screenshots from local storage
+        document.addEventListener("DOMContentLoaded", () => {
+            const screenshotSelector = document.getElementById("screenshotSelector");
+            const screenshots = JSON.parse(localStorage.getItem("screenshots")) || [];
+
+            screenshots.forEach((screenshot, index) => {
+                const label = document.createElement('label');
+                label.innerHTML = `
+                    <input type="checkbox" name="screenshots" value="${screenshot}">
+                    <img src="${screenshot}" style="width: 150px; margin: 5px;">
+                `;
+                screenshotSelector.appendChild(label);
+            });
+        });
+
+        // Handle form submission
+        document.getElementById("emailForm").addEventListener("submit", async (event) => {
+            event.preventDefault();
+
+            const formData = new FormData(event.target);
+            const email = formData.get('email');
+            const selectedScreenshots = formData.getAll('screenshots');
+
+            if (selectedScreenshots.length === 0) {
+                alert("Please select at least one screenshot.");
+                return;
+            }
+
+            try {
+                const response = await fetch('/send-screenshots', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, screenshots: selectedScreenshots })
+                });
+
+                const result = await response.json();
+                if (result.success) {
+                    alert("Screenshots sent successfully!");
+                } else {
+                    alert("Failed to send screenshots.");
+                }
+            } catch (error) {
+                console.error("Error sending screenshots:", error);
+            }
+        });
+    </script>
+</body>
+</html>

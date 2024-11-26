@@ -20,7 +20,7 @@
     <img src="images/MinecraftLogo.webp" alt="MMLogo" style="width: 300px;">
 
     <main>
-        <h1>Minecraft Madness Live Streaming</h1>
+        <h2>Minecraft Madness Live Streaming</h1>
 
         <!-- Imported Video Stream Preview -->
         <h2>Imported Video Stream Preview</h2>
@@ -34,6 +34,7 @@
         <div id="screenshotGallery">
             <h2>Screenshot Gallery</h2>
             <div id="galleryContainer"></div>
+            <button onclick="window.location.href='./email.html'">Get Screenshot</button>
         </div>
         <button onclick="toggleDarkMode()">Toggle Dark Mode</button>
     </main>
@@ -85,7 +86,7 @@
             }
         
             // Apply dark mode to other shared elements (e.g., header, footer)
-            document.querySelectorAll("header, footer, nav, h1").forEach(element => {
+            document.querySelectorAll("header, footer, nav").forEach(element => {
                 element.classList.toggle("dark-mode");
             });
         }
