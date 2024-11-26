@@ -16,17 +16,17 @@ app.use(cors());
 
 // Serve static files for direct image access
 app.use('/images', express.static(path.join('images')));
+// Middleware
+app.use(helmet()); // Security headers
+app.use(express.static('public')); // Serve static files
 
 
 // Serve a favicon to prevent 404 errors for favicon requests
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, 'index.html'));
-});
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, 'frontpage.html'));
-});
 
 
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/public/frontpage.html'); // Serve the main HTML file
+});
 
 
 // Create a WebSocket server that listens on the same HTTP server
