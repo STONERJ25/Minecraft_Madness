@@ -16,13 +16,15 @@ app.use(cors());
 
 // Serve static files for direct image access
 app.use('/images', express.static(path.join('images')));
-// Middleware
-app.use(helmet()); // Security headers
-app.use(express.static('public')); // Serve static files
 
 
 // Serve a favicon to prevent 404 errors for favicon requests
-
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'index.html'));
+});
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'frontpage.html'));
+});
 
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/public/frontpage.html'); // Serve the main HTML file
@@ -68,7 +70,7 @@ if (!fs.existsSync(imagesDir)) {
 }
 
 // Start the server
-const PORT = 3000;
+const PORT = 8765;
 server.listen(PORT, () => {
   console.log(`WebSocket server running on ws://localhost:${PORT}`);
 });

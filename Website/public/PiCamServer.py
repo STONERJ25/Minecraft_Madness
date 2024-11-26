@@ -8,8 +8,8 @@ import time
 import traceback
 
 # WebSocket server address
-#WS_SERVER = "ws://localhost:8765"  # Address of the WebSocket server
-WS_SERVER = "wss://node-production-acc4.up.railway.app:3000"
+WS_SERVER = "ws://localhost:8765"  # Address of the WebSocket server
+
 # OpenCV video capture (default webcam)
 cap = cv2.VideoCapture(0)
 
@@ -27,7 +27,6 @@ async def send_video():
             _, buffer = cv2.imencode('.jpg', frame)
             # Send the raw JPEG bytes to the WebSocket server
             await websocket.send(buffer.tobytes())
-        #    time.sleep(1)
 
 def gen():
     while True:
