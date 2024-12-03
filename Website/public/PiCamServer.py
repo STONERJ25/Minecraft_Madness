@@ -39,6 +39,7 @@ def gen():
             frame = buffer.tobytes()
             yield (b'--frame\r\n'
                    b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+        time.sleep(2)
 
 @app.route('/video_feed')
 def video_feed():
