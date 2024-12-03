@@ -5,7 +5,7 @@ const darkModeButton = document.querySelector("#darkModeButton");
 // Function to refresh the image every second
 function refreshImage() {
     const timestamp = new Date().getTime(); // Get current timestamp
-    image.src = `images/burner.jpg?t=${timestamp}`; // Append timestamp as a query param
+    image.src = `images/burner.jpg`; // Append timestamp as a query param
 }
 
 // Refresh the image every second
