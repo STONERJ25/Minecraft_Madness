@@ -9,7 +9,7 @@ import traceback
 
 # WebSocket server address
 #WS_SERVER = "ws://localhost:8765"  # Address of the WebSocket server
-WS_SERVER = "wss://node-production-acc4.up.railway.app:3000"
+WS_SERVER = "wss://node-production-617e.up.railway.app"
 # OpenCV video capture (default webcam)
 cap = cv2.VideoCapture(0)
 

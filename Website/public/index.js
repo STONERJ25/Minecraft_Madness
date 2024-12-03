@@ -17,6 +17,16 @@ app.use(cors());
 // Serve static files for direct image access
 app.use('/images', express.static(path.join('images')));
 
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        "default-src": ["'self'"],
+        "script-src-attr": ["'unsafe-inline'"], // Allow inline event handlers
+      },
+    },
+  })
+);
 
 // Serve a favicon to prevent 404 errors for favicon requests
 app.get('*', (req, res) => {
