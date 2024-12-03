@@ -18,7 +18,7 @@ function refreshImage() {
 
 
 // Refresh the image every second
-setInterval(refreshImage, 1);
+setInterval(refreshImage, 50);
 
 // Screenshot functionality
 function takeScreenshot() {
