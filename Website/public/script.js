@@ -3,22 +3,18 @@ const screenshotButton = document.querySelector("#screenshotButton");
 const darkModeButton = document.querySelector("#darkModeButton");
 
 // Function to refresh the image every second
+// Function to refresh the image every second
 function refreshImage() {
     const img = document.getElementById("imageElement");
 
-    // Save the current source
-    const currentSrc = img.src;
-
-    // Temporarily clear the source to force a reload
-    img.src = '';
-    
-    // Reassign the original source to trigger the reload
-    img.src = currentSrc;
+    // Append a timestamp to the URL to bypass cache
+    const timestamp = new Date().getTime();
+    img.src = `images/burner.jpg?t=${timestamp}`;
 }
 
-
-// Refresh the image every second
+// Refresh the image every 1 second
 setInterval(refreshImage, 1000);
+
 
 // Screenshot functionality
 function takeScreenshot() {
