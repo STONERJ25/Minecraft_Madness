@@ -17,7 +17,7 @@
         </nav>
         
     </header>
-    <img src="../images/MinecraftLogo.webp" alt="MMLogo" style="width: 300px;">
+    <img src="./images/MinecraftLogo.webp" alt="MMLogo" style="width: 300px;">
 
     <main>
         <h2>Minecraft Madness Live Streaming</h1>
@@ -25,7 +25,7 @@
         <!-- Imported Video Stream Preview -->
         <h2>Imported Video Stream Preview</h2>
         <div id="container">
-            <img id="imageElement" src="../images/burner.jpg" style="width: 100%; max-width: 800px;">
+            <img id="imageElement" src="./images/burner.jpg" style="width: 100%; max-width: 800px;">
         </div>
 
         <button type="button" onclick="takeScreenshot()">Screenshot</button>
@@ -47,7 +47,7 @@
         // Function to refresh the image every second
         function refreshImage() {
             const timestamp = new Date().getTime(); // Get current timestamp
-            image.src = `../images/burner.jpg?t=${timestamp}`; // Append timestamp as a query param
+            image.src = `./images/burner.jpg?t=${timestamp}`; // Append timestamp as a query param
         }
 
         // Refresh the image every second
