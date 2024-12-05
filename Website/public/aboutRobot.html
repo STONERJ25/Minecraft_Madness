@@ -6,25 +6,60 @@
     <title>PiCam Server</title>
     <link rel="stylesheet" href="frontpage.css" />
 </head>
+<script>
+
+    function toggleDarkMode() {
+        const body = document.body;
+    
+        // Toggle the dark mode class
+        body.classList.toggle("dark-mode");
+    
+        // Save the preference to local storage
+        if (body.classList.contains("dark-mode")) {
+            localStorage.setItem("darkMode", "enabled");
+        } else {
+            localStorage.setItem("darkMode", "disabled");
+        }
+    
+        // Apply dark mode to other shared elements (e.g., header, footer)
+        document.querySelectorAll("header, footer, nav, h1").forEach(element => {
+            element.classList.toggle("dark-mode");
+        });
+    }
+    
+    // Apply the dark mode on page load if it was enabled previously
+    document.addEventListener("DOMContentLoaded", () => {
+        const darkMode = localStorage.getItem("darkMode");
+        if (darkMode === "enabled") {
+            document.body.classList.add("dark-mode");
+    
+            // Apply dark mode to other shared elements (e.g., header, footer)
+            document.querySelectorAll("header, footer, nav").forEach(element => {
+                element.classList.add("dark-mode");
+            });
+        }
+    });
+
+</script>
 <body>
     <header>
         <nav>
             <ul>
                 <li><a href="./frontpage.html">Home</a></li>
-                <li><a href="./aboutRobot.html">About the Robot</a></li>
+                <li><a href="./aboutRobot.html">Our Robot</a></li>
                 <li><a href="./aboutTeam.html">About the Team</a></li>
             </ul>
         </nav>
         
     </header>
-    <img src="images/MinecraftLogo.webp" alt="MMLogo" style="width: 300px;">
+    <img src="../images/MinecraftLogo.webp" alt="MMLogo" style="width: 300px;">
 
     <div class="image-container" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding: 20px; margin: 20px 0;">
-        <img src="images/Robot/Robot 1.jpg" alt="Robot Front View" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: transform 0.3s ease, z-index 0.3s; cursor: pointer;" onmouseover="this.style.transform='scale(1.1)'; this.style.zIndex='1'" onmouseout="this.style.transform='scale(1)'; this.style.zIndex='0'">
+        <img src="../images/Robot/Robot 1.jpg" alt="Robot Front View" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: transform 0.3s ease, z-index 0.3s; cursor: pointer;" onmouseover="this.style.transform='scale(1.1)'; this.style.zIndex='1'" onmouseout="this.style.transform='scale(1)'; this.style.zIndex='0'">
         
-        <img src="images/Robot/Robot 2.jpg" alt="Robot Top View" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: transform 0.3s ease, z-index 0.3s; cursor: pointer;" onmouseover="this.style.transform='scale(1.1)'; this.style.zIndex='1'" onmouseout="this.style.transform='scale(1)'; this.style.zIndex='0'">
+        <img src="../images/Robot/Robot 2.jpg" alt="Robot Top View" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: transform 0.3s ease, z-index 0.3s; cursor: pointer;" onmouseover="this.style.transform='scale(1.1)'; this.style.zIndex='1'" onmouseout="this.style.transform='scale(1)'; this.style.zIndex='0'">
         
-        <img src="images/Robot/Robot 3.jpg" alt="Robot Side View" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: transform 0.3s ease, z-index 0.3s; cursor: pointer;" onmouseover="this.style.transform='scale(1.1)'; this.style.zIndex='1'" onmouseout="this.style.transform='scale(1)'; this.style.zIndex='0'">
+        <img src="../images/Robot/Robot 3.jpg" alt="Robot Side View" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: transform 0.3s ease, z-index 0.3s; cursor: pointer;" onmouseover="this.style.transform='scale(1.1)'; this.style.zIndex='1'" onmouseout="this.style.transform='scale(1)'; this.style.zIndex='0'">
     </div>
     
     <div style="padding: 20px; margin: 20px 0;">
@@ -36,3 +71,4 @@
             <!-- Paragraph 2 placeholder -->
         </div>
     </div>
+</body>
